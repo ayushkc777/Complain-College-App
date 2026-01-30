@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lost_n_found/app/app.dart';
+import 'package:complain_college_app/app/app.dart';
+import 'package:complain_college_app/core/services/hive/hive_service.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Set system UI overlay style
+  await HiveService.init();
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -18,3 +20,5 @@ void main() {
 
   runApp(const ProviderScope(child: MyApp()));
 }
+
+
