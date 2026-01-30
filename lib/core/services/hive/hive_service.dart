@@ -1,16 +1,12 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-class HiveService {
-  HiveService._();
-
+class HiveService {\n  HiveService._();\n\n  static bool _initialized = false;\n
   static const String usersBoxName = 'users';
   static const String sessionBoxName = 'session';
 
-  static Future<void> init() async {
-    await Hive.initFlutter();
+  static Future<void> init() async {\n    if (_initialized) return;\n    await Hive.initFlutter();
     await Hive.openBox(usersBoxName);
-    await Hive.openBox(sessionBoxName);
-  }
+    await Hive.openBox(sessionBoxName);\n    _initialized = true;\n  }
 
   static Box get _usersBox => Hive.box(usersBoxName);
   static Box get _sessionBox => Hive.box(sessionBoxName);
@@ -51,4 +47,5 @@ class HiveService {
     await _sessionBox.delete('currentUser');
   }
 }
+
 
