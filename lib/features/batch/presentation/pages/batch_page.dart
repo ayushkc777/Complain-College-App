@@ -8,3 +8,4 @@ class BatchPage extends StatelessWidget {
     return const Placeholder();
   }
 }
+
