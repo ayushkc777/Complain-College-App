@@ -3,58 +3,58 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  // Primary Colors - Modern Gradient Blue/Purple
-  static const Color primary = Color(0xFF6C63FF);
-  static const Color primaryDark = Color(0xFF5B54E8);
-  static const Color primaryLight = Color(0xFF8F87FF);
+  // Primary Colors - Blue / White theme
+  static const Color primary = Color(0xFF1E6BFF);
+  static const Color primaryDark = Color(0xFF1453D8);
+  static const Color primaryLight = Color(0xFF7AA6FF);
 
-  // Secondary Colors
-  static const Color secondary = Color(0xFFFF6584);
-  static const Color secondaryLight = Color(0xFFFF8BA0);
+  // Secondary Colors (blue accents)
+  static const Color secondary = Color(0xFF00A6FB);
+  static const Color secondaryLight = Color(0xFF6BCBFF);
 
-  // Accent Colors
-  static const Color accent1 = Color(0xFF4ECDC4);
-  static const Color accent2 = Color(0xFFFFA07A);
-  static const Color accent3 = Color(0xFF98D8C8);
+  // Accent Colors (soft blues)
+  static const Color accent1 = Color(0xFF4CC9F0);
+  static const Color accent2 = Color(0xFF90CAF9);
+  static const Color accent3 = Color(0xFFB3E5FC);
 
   // Neutral Colors
-  static const Color background = Color(0xFFF8F9FE);
+  static const Color background = Color(0xFFF7F9FF);
   static const Color surface = Color(0xFFFFFFFF);
-  static const Color surfaceVariant = Color(0xFFF5F6FA);
-  static const Color inputFill = Color(0xFFF5F5F5);
+  static const Color surfaceVariant = Color(0xFFF2F6FF);
+  static const Color inputFill = Color(0xFFF1F4FB);
 
   // Text Colors
-  static const Color textPrimary = Color(0xFF2D3142);
+  static const Color textPrimary = Color(0xFF1C2430);
   static const Color textSecondary = Color(0xFF6B7280);
   static const Color textTertiary = Color(0xFF9CA3AF);
   static const Color textDark = Color(0xFF212121);
   static const Color textMuted = Color(0xFF757575);
 
   // Border & Divider
-  static const Color border = Color(0xFFE5E7EB);
-  static const Color divider = Color(0xFFEFF0F6);
+  static const Color border = Color(0xFFE3E8F0);
+  static const Color divider = Color(0xFFEFF3FA);
 
   // Status Colors
-  static const Color success = Color(0xFF4CAF50);
-  static const Color warning = Color(0xFFFFA726);
+  static const Color success = Color(0xFF22C55E);
+  static const Color warning = Color(0xFFF59E0B);
   static const Color error = Color(0xFFEF4444);
   static const Color info = Color(0xFF3B82F6);
 
   // Login/Auth Colors (Blue theme)
-  static const Color authPrimary = Color(0xFF2196F3);
+  static const Color authPrimary = Color(0xFF1E6BFF);
 
-  // Item Status Colors
-  static const Color lostColor = Color(0xFFE53935);
-  static const Color foundColor = Color(0xFF43A047);
+  // Complaint Status Colors (used as Open/Resolved)
+  static const Color openColor = Color(0xFF1E6BFF); // Open
+  static const Color resolvedColor = Color(0xFF22C55E); // Resolved
   static const Color claimedColor = Color(0xFF9E9E9E);
 
-  // Onboarding Colors
-  static const Color onboarding1Primary = Color(0xFF667eea);
-  static const Color onboarding1Secondary = Color(0xFF764ba2);
-  static const Color onboarding2Primary = Color(0xFFf093fb);
-  static const Color onboarding2Secondary = Color(0xFFf5576c);
-  static const Color onboarding3Primary = Color(0xFF4facfe);
-  static const Color onboarding3Secondary = Color(0xFF00f2fe);
+  // Onboarding Colors (blue gradients)
+  static const Color onboarding1Primary = Color(0xFF1E6BFF);
+  static const Color onboarding1Secondary = Color(0xFF5A8CFF);
+  static const Color onboarding2Primary = Color(0xFF2D8CFF);
+  static const Color onboarding2Secondary = Color(0xFF6BB6FF);
+  static const Color onboarding3Primary = Color(0xFF0081FF);
+  static const Color onboarding3Secondary = Color(0xFF4FC3FF);
 
   // White with opacity
   static const Color white90 = Color(0xE6FFFFFF);
@@ -70,42 +70,42 @@ class AppColors {
   static const Color textSecondary60 = Color(0x996B7280);
   static const Color textSecondary50 = Color(0x806B7280);
 
-  // Item Status Gradients
-  static const LinearGradient lostGradient = LinearGradient(
+  // Complaint Status Gradients (Open/Resolved)
+  static const LinearGradient openGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFFE53935), Color(0xFFD32F2F)],
+    colors: [Color(0xFF1E6BFF), Color(0xFF2E7BFF)],
   );
 
-  static const LinearGradient foundGradient = LinearGradient(
+  static const LinearGradient resolvedGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFF43A047), Color(0xFF388E3C)],
+    colors: [Color(0xFF22C55E), Color(0xFF16A34A)],
   );
 
   // Gradient Colors
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFF6C63FF), Color(0xFF5B54E8)],
+    colors: [Color(0xFF1E6BFF), Color(0xFF2D8CFF)],
   );
 
   static const LinearGradient secondaryGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFFFF6584), Color(0xFFFF8BA0)],
+    colors: [Color(0xFF4CC9F0), Color(0xFF90CAF9)],
   );
 
   static const LinearGradient accentGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFF4ECDC4), Color(0xFF98D8C8)],
+    colors: [Color(0xFFB3E5FC), Color(0xFF4FC3F7)],
   );
 
   static const LinearGradient backgroundGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Color(0xFFF8F9FE), Color(0xFFFFFFFF)],
+    colors: [Color(0xFFF7F9FF), Color(0xFFFFFFFF)],
   );
 
   // Onboarding Gradients
@@ -144,11 +144,11 @@ class AppColors {
 
   // Shadows
   static const List<BoxShadow> cardShadow = [
-    BoxShadow(color: Color(0x146C63FF), blurRadius: 24, offset: Offset(0, 8)),
+    BoxShadow(color: Color(0x141E6BFF), blurRadius: 24, offset: Offset(0, 8)),
   ];
 
   static const List<BoxShadow> buttonShadow = [
-    BoxShadow(color: Color(0x406C63FF), blurRadius: 16, offset: Offset(0, 4)),
+    BoxShadow(color: Color(0x401E6BFF), blurRadius: 16, offset: Offset(0, 4)),
   ];
 
   static const List<BoxShadow> softShadow = [
@@ -169,3 +169,5 @@ class AppColors {
     BoxShadow(color: Color(0x1A000000), blurRadius: 12, offset: Offset(0, 4)),
   ];
 }
+
+
