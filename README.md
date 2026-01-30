@@ -1,6 +1,6 @@
-# Lost & Found Mobile App
+# College Complain App
 
-A Flutter mobile application for Softwarica College's lost and found system.
+A Flutter mobile application for Softwarica College's complaint management system.
 
 > **Note:** This project is solely for college teaching purposes only.
 
@@ -8,7 +8,7 @@ A Flutter mobile application for Softwarica College's lost and found system.
 
 This app uses the following backend API:
 
-- **Repository:** https://github.com/kiranrana8973/lost_n_found_api
+- **Repository:** https://github.com/ayushkc777/complain_college_api
 
 ## Getting Started
 
@@ -25,7 +25,7 @@ This project is a starting point for a Flutter application.
 1. Clone the repository
 
 ```bash
-git clone https://github.com/kiranrana8973/lost_n_found_mobile.git
+git clone https://github.com/ayushkc777/Complain-College-App.git
 ```
 
 2. Install dependencies
@@ -43,7 +43,7 @@ flutter run
 ## Features
 
 - User authentication (Login/Signup)
-- Report lost items
-- Report found items
-- Browse lost and found items
-- Item details and claiming
+- Submit complaints by category
+- Track complaint status
+- Complaint details and updates
+- Support and profile management
