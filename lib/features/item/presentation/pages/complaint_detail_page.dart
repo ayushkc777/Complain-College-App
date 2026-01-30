@@ -3,23 +3,23 @@ import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/theme_extensions.dart';
 import '../../../../core/utils/snackbar_utils.dart';
 
-class ItemDetailPage extends StatelessWidget {
+class ComplaintDetailPage extends StatelessWidget {
   final String title;
   final String location;
   final String time;
   final String category;
-  final bool isLost;
+  final bool isOpen;
   final String? description;
   final String reportedBy;
   final String? imageUrl;
 
-  const ItemDetailPage({
+  const ComplaintDetailPage({
     super.key,
     required this.title,
     required this.location,
     required this.time,
     required this.category,
-    required this.isLost,
+    required this.isOpen,
     this.description,
     required this.reportedBy,
     this.imageUrl,
@@ -110,7 +110,7 @@ class ItemDetailPage extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 decoration: BoxDecoration(
-                  gradient: isLost ? AppColors.lostGradient : AppColors.foundGradient,
+                  gradient: isOpen ? AppColors.openGradient : AppColors.resolvedGradient,
                 ),
                 child: SafeArea(
                   child: Column(
@@ -144,13 +144,13 @@ class ItemDetailPage extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
-                              isLost ? Icons.search_off_rounded : Icons.check_circle_rounded,
+                              isOpen ? Icons.report_problem_rounded : Icons.verified_rounded,
                               size: 18,
                               color: Colors.white,
                             ),
                             const SizedBox(width: 6),
                             Text(
-                              isLost ? 'Lost Item' : 'Found Item',
+                              isOpen ? 'Open Complaint' : 'Resolved Complaint',
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -288,7 +288,7 @@ class ItemDetailPage extends StatelessWidget {
 
                       const SizedBox(height: 20),
 
-                      // Reported By
+                      // Submitted by
                       Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
@@ -317,7 +317,7 @@ class ItemDetailPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    isLost ? 'Reported by' : 'Found by',
+                                    isOpen ? 'Submitted by' : 'Resolved by',
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: context.textSecondary,
@@ -400,7 +400,7 @@ class ItemDetailPage extends StatelessWidget {
                   child: Container(
                     height: 56,
                     decoration: BoxDecoration(
-                      gradient: isLost ? AppColors.foundGradient : AppColors.primaryGradient,
+                      gradient: isOpen ? AppColors.resolvedGradient : AppColors.primaryGradient,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: AppColors.buttonShadow,
                     ),
@@ -408,12 +408,12 @@ class ItemDetailPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          isLost ? Icons.check_circle_rounded : Icons.pan_tool_rounded,
+                          isOpen ? Icons.verified_rounded : Icons.refresh_rounded,
                           color: Colors.white,
                         ),
                         const SizedBox(width: 10),
                         Text(
-                          isLost ? 'I Found This Item' : 'Claim This Item',
+                          isOpen ? 'Resolve Complaint' : 'Request Review',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -445,26 +445,26 @@ class ItemDetailPage extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                gradient: isLost ? AppColors.foundGradient : AppColors.primaryGradient,
+                gradient: isOpen ? AppColors.resolvedGradient : AppColors.primaryGradient,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(
-                isLost ? Icons.check_circle_rounded : Icons.pan_tool_rounded,
+                isOpen ? Icons.verified_rounded : Icons.refresh_rounded,
                 color: Colors.white,
                 size: 20,
               ),
             ),
             const SizedBox(width: 12),
             Text(
-              isLost ? 'Found This Item?' : 'Claim Item',
+              isOpen ? 'Resolve this complaint?' : 'Request Review',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
         ),
         content: Text(
-          isLost
-              ? 'You will be connected with the owner to return the item. Continue?'
-              : 'Please provide proof of ownership to claim this item.',
+          isOpen
+              ? 'This will mark the complaint as resolved. Continue?'
+              : 'Please provide proof of ownership to Request Review.',
         ),
         actions: [
           TextButton(
@@ -479,13 +479,13 @@ class ItemDetailPage extends StatelessWidget {
               Navigator.pop(context);
               SnackbarUtils.showSuccess(
                 context,
-                isLost ? 'Owner has been notified!' : 'Claim request sent!',
+                isOpen ? 'Complaint marked as resolved!' : 'Review request sent!',
               );
             },
             child: Text(
               'Continue',
               style: TextStyle(
-                color: isLost ? AppColors.foundColor : AppColors.primary,
+                color: isOpen ? AppColors.resolvedColor : AppColors.primary,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -527,3 +527,7 @@ class _InfoChip extends StatelessWidget {
     );
   }
 }
+
+
+
+
