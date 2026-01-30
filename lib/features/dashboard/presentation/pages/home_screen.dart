@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/theme_extensions.dart';
 import '../../../../app/routes/app_routes.dart';
-import '../../../item/presentation/pages/item_detail_page.dart';
+import '../../../item/presentation/pages/complaint_detail_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,84 +12,79 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedFilter = 0; // 0: All, 1: Lost, 2: Found
+  int _selectedFilter = 0; // 0: All, 1: Open, 2: Resolved
   String _selectedCategory = 'All';
 
-  final List<String> _filters = ['All', 'Lost', 'Found'];
-  // Later this data will come from backend/API
+  final List<String> _filters = ['All', 'Open', 'Resolved'];
+
   final List<Map<String, dynamic>> _categories = [
     {'name': 'All', 'icon': Icons.apps_rounded},
-    {'name': 'Electronics', 'icon': Icons.devices_rounded},
-    {'name': 'Personal', 'icon': Icons.person_rounded},
-    {'name': 'Accessories', 'icon': Icons.watch_rounded},
-    {'name': 'Documents', 'icon': Icons.description_rounded},
-    {'name': 'Keys', 'icon': Icons.key_rounded},
-    {'name': 'Bags', 'icon': Icons.backpack_rounded},
+    {'name': 'Academics', 'icon': Icons.school_rounded},
+    {'name': 'Facilities', 'icon': Icons.apartment_rounded},
+    {'name': 'Administration', 'icon': Icons.admin_panel_settings_rounded},
+    {'name': 'Harassment', 'icon': Icons.report_gmailerrorred_rounded},
+    {'name': 'Other', 'icon': Icons.more_horiz_rounded},
   ];
 
-  // Mock data for items
-  final List<Map<String, dynamic>> _items = [
+  // Mock data for complaints
+  final List<Map<String, dynamic>> _complaints = [
     {
-      'title': 'iPhone 14 Pro',
+      'title': 'Wi-Fi outage in Block A',
       'location': 'Library, Block A',
       'time': '2h ago',
-      'category': 'Electronics',
-      'isLost': true,
+      'category': 'Facilities',
+      'isOpen': true,
       'image': null,
     },
     {
-      'title': 'Blue Backpack',
+      'title': 'Late shuttle timings',
+      'location': 'Main Gate',
+      'time': '4h ago',
+      'category': 'Administration',
+      'isOpen': true,
+      'image': null,
+    },
+    {
+      'title': 'Exam schedule confusion',
+      'location': 'Academic Office',
+      'time': '1d ago',
+      'category': 'Academics',
+      'isOpen': false,
+      'image': null,
+    },
+    {
+      'title': 'Broken projector in Hall 3',
+      'location': 'Block C, Hall 3',
+      'time': '1d ago',
+      'category': 'Facilities',
+      'isOpen': true,
+      'image': null,
+    },
+    {
+      'title': 'Harassment report - cafeteria',
       'location': 'Cafeteria',
-      'time': '3h ago',
-      'category': 'Bags',
-      'isLost': false,
-      'image': null,
-    },
-    {
-      'title': 'Car Keys',
-      'location': 'Parking Lot',
-      'time': '5h ago',
-      'category': 'Keys',
-      'isLost': true,
-      'image': null,
-    },
-    {
-      'title': 'Student ID Card',
-      'location': 'Block C, Room 201',
-      'time': '1d ago',
-      'category': 'Documents',
-      'isLost': false,
-      'image': null,
-    },
-    {
-      'title': 'Apple Watch',
-      'location': 'Gym',
-      'time': '1d ago',
-      'category': 'Accessories',
-      'isLost': true,
-      'image': null,
-    },
-    {
-      'title': 'Wallet',
-      'location': 'Block B, Ground Floor',
       'time': '2d ago',
-      'category': 'Personal',
-      'isLost': false,
+      'category': 'Harassment',
+      'isOpen': false,
+      'image': null,
+    },
+    {
+      'title': 'ID card issue',
+      'location': 'Student Services',
+      'time': '3d ago',
+      'category': 'Other',
+      'isOpen': false,
       'image': null,
     },
   ];
 
-  List<Map<String, dynamic>> get _filteredItems {
-    return _items.where((item) {
-      // Filter by Lost/Found
-      if (_selectedFilter == 1 && !item['isLost']) return false;
-      if (_selectedFilter == 2 && item['isLost']) return false;
-
-      // Filter by category
+  List<Map<String, dynamic>> get _filteredComplaints {
+    return _complaints.where((item) {
+      if (_selectedFilter == 1 && !item['isOpen']) return false;
+      if (_selectedFilter == 2 && item['isOpen']) return false;
       if (_selectedCategory != 'All' && item['category'] != _selectedCategory) {
         return false;
       }
-
       return true;
     }).toList();
   }
@@ -97,42 +92,64 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: context.backgroundColor // Using theme default,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            // App Bar
+            // Header
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Welcome Back!',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: context.textSecondary,
-                            fontWeight: FontWeight.w500,
+                    Builder(
+                      builder: (context) => GestureDetector(
+                        onTap: () => Scaffold.of(context).openDrawer(),
+                        child: Container(
+                          width: 48,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(14),
+                            boxShadow: AppColors.softShadow,
+                          ),
+                          child: const Icon(
+                            Icons.menu_rounded,
+                            color: AppColors.primary,
                           ),
                         ),
-                        const SizedBox(height: 4),
-                        Text(
-                          'John Doe',
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: context.textPrimary,
-                          ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Welcome Back!',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: context.textSecondary,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Aayush KC',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: context.textPrimary,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                     Container(
-                      width: 56,
-                      height: 56,
+                      width: 52,
+                      height: 52,
                       decoration: BoxDecoration(
                         gradient: AppColors.primaryGradient,
                         borderRadius: BorderRadius.circular(16),
@@ -140,21 +157,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: Stack(
                         children: [
-                          Center(
+                          const Center(
                             child: Icon(
                               Icons.notifications_rounded,
                               color: Colors.white,
-                              size: 24,
+                              size: 22,
                             ),
                           ),
                           Positioned(
-                            top: 10,
-                            right: 10,
+                            top: 8,
+                            right: 8,
                             child: Container(
-                              width: 12,
-                              height: 12,
+                              width: 10,
+                              height: 10,
                               decoration: BoxDecoration(
-                                color: AppColors.lostColor,
+                                color: AppColors.openColor,
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: Colors.white,
@@ -183,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: 'Search items...',
+                      hintText: 'Search complaints...',
                       hintStyle: TextStyle(color: AppColors.textTertiary),
                       prefixIcon: Icon(
                         Icons.search_rounded,
@@ -195,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           gradient: AppColors.primaryGradient,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.tune_rounded,
                           color: Colors.white,
                           size: 20,
@@ -212,9 +229,76 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            const SliverToBoxAdapter(child: SizedBox(height: 20)),
+            const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
-            // Filter Tabs (All, Lost, Found)
+            // CTA
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    gradient: AppColors.primaryGradient,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: AppColors.buttonShadow,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Submit a Complaint',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              'Report campus issues in minutes',
+                              style: TextStyle(
+                                color: Colors.white.withValues(alpha: 0.9),
+                                fontSize: 13,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Row(
+                          children: const [
+                            Icon(Icons.add_rounded, color: AppColors.primary, size: 18),
+                            SizedBox(width: 6),
+                            Text(
+                              'New',
+                              style: TextStyle(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            const SliverToBoxAdapter(child: SizedBox(height: 16)),
+
+            // Filter Tabs
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -228,16 +312,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     children: List.generate(_filters.length, (index) {
                       final isSelected = _selectedFilter == index;
-                      Color? bgColor;
                       Gradient? gradient;
 
                       if (isSelected) {
                         if (index == 0) {
                           gradient = AppColors.primaryGradient;
                         } else if (index == 1) {
-                          gradient = AppColors.lostGradient;
+                          gradient = AppColors.openGradient;
                         } else {
-                          gradient = AppColors.foundGradient;
+                          gradient = AppColors.resolvedGradient;
                         }
                       }
 
@@ -253,7 +336,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             decoration: BoxDecoration(
                               gradient: gradient,
-                              color: bgColor,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Center(
@@ -277,7 +359,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            const SliverToBoxAdapter(child: SizedBox(height: 20)),
+            const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
             // Category Chips
             SliverToBoxAdapter(
@@ -303,9 +385,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           duration: const Duration(milliseconds: 200),
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           decoration: BoxDecoration(
-                            gradient: isSelected
-                                ? AppColors.primaryGradient
-                                : null,
+                            gradient: isSelected ? AppColors.primaryGradient : null,
                             color: isSelected ? null : Colors.white,
                             borderRadius: BorderRadius.circular(12),
                             boxShadow: AppColors.softShadow,
@@ -340,7 +420,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            const SliverToBoxAdapter(child: SizedBox(height: 24)),
+            const SliverToBoxAdapter(child: SizedBox(height: 20)),
 
             // Quick Stats
             SliverToBoxAdapter(
@@ -350,19 +430,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Expanded(
                       child: _StatCard(
-                        icon: Icons.search_off_rounded,
-                        title: 'Lost Items',
+                        icon: Icons.report_gmailerrorred_rounded,
+                        title: 'Open Complaints',
                         value: '12',
-                        gradient: AppColors.lostGradient,
+                        gradient: AppColors.openGradient,
                       ),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
                       child: _StatCard(
                         icon: Icons.check_circle_rounded,
-                        title: 'Found Items',
+                        title: 'Resolved Complaints',
                         value: '8',
-                        gradient: AppColors.foundGradient,
+                        gradient: AppColors.resolvedGradient,
                       ),
                     ),
                   ],
@@ -372,7 +452,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
 
-            // Recent Items Section Header
+            // Recent Complaints
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -380,7 +460,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Recent Items',
+                      'Recent Complaints',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -389,13 +469,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     TextButton(
                       onPressed: () {},
-                      child: Text(
-                        'See All',
-                        style: TextStyle(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                      child: const Text('See All'),
                     ),
                   ],
                 ),
@@ -404,8 +478,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SliverToBoxAdapter(child: SizedBox(height: 12)),
 
-            // Items List
-            _filteredItems.isEmpty
+            _filteredComplaints.isEmpty
                 ? SliverToBoxAdapter(
                     child: Center(
                       child: Padding(
@@ -419,7 +492,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'No items found',
+                              'No complaints found',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: context.textSecondary,
@@ -435,33 +508,33 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     sliver: SliverList(
                       delegate: SliverChildBuilderDelegate((context, index) {
-                        final item = _filteredItems[index];
+                        final item = _filteredComplaints[index];
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 16.0),
-                          child: _ItemCard(
+                          child: _ComplaintCard(
                             title: item['title'],
                             location: item['location'],
                             time: item['time'],
                             category: item['category'],
-                            isLost: item['isLost'],
+                            isOpen: item['isOpen'],
                             onTap: () {
                               AppRoutes.push(
                                 context,
-                                ItemDetailPage(
+                                ComplaintDetailPage(
                                   title: item['title'],
                                   location: item['location'],
                                   time: item['time'],
                                   category: item['category'],
-                                  isLost: item['isLost'],
+                                  isOpen: item['isOpen'],
                                   description:
-                                      'This item was ${item['isLost'] ? 'lost' : 'found'} at ${item['location']}. Please contact if you have any information.',
-                                  reportedBy: 'John Doe',
+                                      'This complaint was reported at ${item['location']}. Please follow up with the helpdesk.',
+                                  reportedBy: 'Aayush KC',
                                 ),
                               );
                             },
                           ),
                         );
-                      }, childCount: _filteredItems.length),
+                      }, childCount: _filteredComplaints.length),
                     ),
                   ),
 
@@ -489,44 +562,43 @@ class _StatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(18),
         boxShadow: AppColors.cardShadow,
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 48,
-            height: 48,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
               gradient: gradient,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(icon, color: Colors.white, size: 24),
+            child: Icon(icon, color: Colors.white, size: 22),
           ),
-          const SizedBox(width: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: context.textPrimary,
-                ),
-              ),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: context.textSecondary,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
+          const SizedBox(height: 10),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: context.textPrimary,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 12,
+              color: context.textSecondary,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ],
       ),
@@ -534,37 +606,35 @@ class _StatCard extends StatelessWidget {
   }
 }
 
-class _ItemCard extends StatelessWidget {
+class _ComplaintCard extends StatelessWidget {
   final String title;
   final String location;
   final String time;
   final String category;
-  final bool isLost;
+  final bool isOpen;
   final VoidCallback? onTap;
 
-  const _ItemCard({
+  const _ComplaintCard({
     required this.title,
     required this.location,
     required this.time,
     required this.category,
-    required this.isLost,
+    required this.isOpen,
     this.onTap,
   });
 
   IconData _getCategoryIcon(String category) {
     switch (category) {
-      case 'Electronics':
-        return Icons.devices_rounded;
-      case 'Personal':
-        return Icons.person_rounded;
-      case 'Accessories':
-        return Icons.watch_rounded;
-      case 'Documents':
-        return Icons.description_rounded;
-      case 'Keys':
-        return Icons.key_rounded;
-      case 'Bags':
-        return Icons.backpack_rounded;
+      case 'Academics':
+        return Icons.school_rounded;
+      case 'Facilities':
+        return Icons.apartment_rounded;
+      case 'Administration':
+        return Icons.admin_panel_settings_rounded;
+      case 'Harassment':
+        return Icons.report_gmailerrorred_rounded;
+      case 'Other':
+        return Icons.more_horiz_rounded;
       default:
         return Icons.inventory_2_rounded;
     }
@@ -587,14 +657,13 @@ class _ItemCard extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
-                // Item Icon
                 Container(
                   width: 64,
                   height: 64,
                   decoration: BoxDecoration(
-                    gradient: isLost
-                        ? AppColors.lostGradient
-                        : AppColors.foundGradient,
+                    gradient: isOpen
+                        ? AppColors.openGradient
+                        : AppColors.resolvedGradient,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Icon(
@@ -626,18 +695,18 @@ class _ItemCard extends StatelessWidget {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: isLost
-                                  ? AppColors.lostColor.withAlpha(26)
-                                  : AppColors.foundColor.withAlpha(26),
+                              color: isOpen
+                                  ? AppColors.openColor.withAlpha(26)
+                                  : AppColors.resolvedColor.withAlpha(26),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
-                              isLost ? 'Lost' : 'Found',
+                              isOpen ? 'Open' : 'Resolved',
                               style: TextStyle(
                                 fontSize: 11,
-                                color: isLost
-                                    ? AppColors.lostColor
-                                    : AppColors.foundColor,
+                                color: isOpen
+                                    ? AppColors.openColor
+                                    : AppColors.resolvedColor,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -714,3 +783,6 @@ class _ItemCard extends StatelessWidget {
     );
   }
 }
+
+
+
