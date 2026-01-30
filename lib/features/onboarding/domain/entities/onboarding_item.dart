@@ -15,3 +15,4 @@ class OnboardingItem {
     required this.gradientColors,
   });
 }
+

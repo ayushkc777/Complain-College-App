@@ -107,3 +107,4 @@ class OnboardingContent extends StatelessWidget {
     );
   }
 }
+

@@ -21,29 +21,28 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage>
   final PageController _pageController = PageController();
   int _currentPage = 0;
   late AnimationController _animationController;
-
-  final List<OnboardingItem> _onboardingItems = const [
+  final List<OnboardingItem> _onboardingItems = const [
     OnboardingItem(
-      title: 'Report Lost Items',
+      title: 'Raise a Complaint',
       description:
-          'Quickly report lost items with photos and detailed descriptions. Our smart matching helps reunite you with your belongings.',
-      icon: Icons.travel_explore_rounded,
+          'File issues with clear details and categories in seconds. Keep everything organized.',
+      icon: Icons.report_gmailerrorred_rounded,
       color: AppColors.onboarding1Primary,
       gradientColors: [AppColors.onboarding1Primary, AppColors.onboarding1Secondary],
     ),
     OnboardingItem(
-      title: 'Find & Discover',
+      title: 'Track Status',
       description:
-          'Browse through found items in real-time. Advanced filters help you find exactly what you\'re looking for.',
-      icon: Icons.location_searching_rounded,
+          'Follow progress in real-time with transparent status updates from the administration.',
+      icon: Icons.track_changes_rounded,
       color: AppColors.onboarding2Primary,
       gradientColors: [AppColors.onboarding2Primary, AppColors.onboarding2Secondary],
     ),
     OnboardingItem(
-      title: 'Connect Instantly',
+      title: 'Get Support',
       description:
-          'Chat directly with finders or owners. Get instant notifications and recover your items quickly and securely.',
-      icon: Icons.forum_rounded,
+          'Connect with the helpdesk and get faster resolution for campus issues.',
+      icon: Icons.support_agent_rounded,
       color: AppColors.onboarding3Primary,
       gradientColors: [AppColors.onboarding3Primary, AppColors.onboarding3Secondary],
     ),
@@ -189,3 +188,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage>
     );
   }
 }
+
+
+
+
