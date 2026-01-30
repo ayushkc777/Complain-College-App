@@ -33,3 +33,4 @@ class AppRoutes {
     Navigator.popUntil(context, (route) => route.isFirst);
   }
 }
+

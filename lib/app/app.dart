@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lost_n_found/app/theme/app_theme.dart';
-import 'package:lost_n_found/features/splash/presentation/pages/splash_page.dart';
+import 'package:complain_college_app/app/theme/app_theme.dart';
+import 'package:complain_college_app/features/splash/presentation/pages/splash_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Lost & Found',
+      title: 'College Complain App',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
@@ -17,3 +17,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
