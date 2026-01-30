@@ -29,7 +29,7 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 20),
                     Text(
-                      'My Profile',
+                      'Student Profile',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -67,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: 16),
 
                     Text(
-                      'John Doe',
+                      'Aayush KC',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'john.doe@softwarica.edu.np',
+                      'aayush@softwarica.edu.np',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.white70,
@@ -90,19 +90,19 @@ class ProfileScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          _StatItem(title: 'Lost', value: '12'),
+                          _StatItem(title: 'Open', value: '12'),
                           Container(
                             width: 1,
                             height: 40,
                             color: AppColors.white30,
                           ),
-                          _StatItem(title: 'Found', value: '8'),
+                          _StatItem(title: 'In Review', value: '4'),
                           Container(
                             width: 1,
                             height: 40,
                             color: AppColors.white30,
                           ),
-                          _StatItem(title: 'Returned', value: '5'),
+                          _StatItem(title: 'Resolved', value: '8'),
                         ],
                       ),
                     ),
@@ -126,7 +126,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: 12),
                     _MenuItem(
                       icon: Icons.history_rounded,
-                      title: 'My Items',
+                      title: 'My Complaints',
                       onTap: () {},
                     ),
                     const SizedBox(height: 12),
@@ -350,3 +350,5 @@ class _MenuItem extends StatelessWidget {
     );
   }
 }
+
+
