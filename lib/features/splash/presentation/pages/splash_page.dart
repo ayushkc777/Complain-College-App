@@ -140,7 +140,7 @@ class _SplashPageState extends ConsumerState<SplashPage>
                         ),
                         child: Center(
                           child: Icon(
-                            Icons.search_rounded,
+                            Icons.report_gmailerrorred_rounded,
                             size: 56,
                             color: Colors.white,
                           ),
@@ -159,7 +159,7 @@ class _SplashPageState extends ConsumerState<SplashPage>
                   child: Column(
                     children: [
                       Text(
-                        'Lost & Found',
+                        'College Complain App',
                         style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.w700,
@@ -169,7 +169,7 @@ class _SplashPageState extends ConsumerState<SplashPage>
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        'Reuniting people with their belongings',
+                        'Submit complaints and track resolution updates',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
@@ -228,3 +228,4 @@ class _SplashPageState extends ConsumerState<SplashPage>
     );
   }
 }
+
