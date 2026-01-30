@@ -1,5 +1,5 @@
-name: lost_n_found
-description: "Lost and Found App - Softwarica College"
+name: complain_college_app
+description: "College Complain App - Softwarica College"
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
@@ -104,3 +104,4 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/svg/
+
