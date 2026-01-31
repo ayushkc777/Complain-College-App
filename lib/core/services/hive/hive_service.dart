@@ -43,10 +43,8 @@ class HiveService {\n  HiveService._();\n\n  static bool _initialized = false;\n
     return null;
   }
 
-  static Future<void> clearSession() async {
-    await _sessionBox.delete('currentUser');
-  }
-}
+  static Future<void> clearSession() async {\n    await _sessionBox.delete('currentUser');\n  }\n\n  static Future<void> close() async {\n    await Hive.close();\n    _initialized = false;\n  }\n}\n
+
 
 
 
