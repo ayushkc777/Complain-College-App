@@ -297,7 +297,7 @@ class _ReportComplaintPageState extends State<ReportComplaintPage> {
 
                       // Photo/Video Upload Section
                       Text(
-                        'Attach Evidence',
+                        'Attach Proof',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -625,6 +625,7 @@ class _ReportComplaintPageState extends State<ReportComplaintPage> {
     );
   }
 }
+
 
 
 
