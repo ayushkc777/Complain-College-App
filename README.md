@@ -2,7 +2,7 @@
 
 A Flutter mobile application for Softwarica College's complaint management system.
 
-> **Note:** This project is solely for college teaching purposes only.
+
 
 ## Backend API
 
