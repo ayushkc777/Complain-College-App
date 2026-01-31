@@ -47,7 +47,8 @@ class StorageService {
     await setString('currentUser', json);
   }
 
-  String? getUserJson() => getString('currentUser');
+  String? getUserJson() => getString('currentUser');\n\n  Future<void> saveRefreshToken(String token) async {\n    await setString('refreshToken', token);\n  }\n\n  String? getRefreshToken() => getString('refreshToken');
 }
+
 
 
