@@ -9,7 +9,7 @@ class StorageService {
   Future<bool> setString(String key, String value) =>
       _prefs.setString(key, value);
 
-  String? getString(String key) => _prefs.getString(key);
+  String? getString(String key) => _prefs.getString(key);\n\n  String getStringOrEmpty(String key) => _prefs.getString(key) ?? '';
 
   // Int
   Future<bool> setInt(String key, int value) => _prefs.setInt(key, value);
@@ -49,6 +49,7 @@ class StorageService {
 
   String? getUserJson() => getString('currentUser');\n\n  Future<void> removeUserJson() async {\n    await remove('currentUser');\n  }\n\n  Future<void> saveRefreshToken(String token) async {\n    await setString('refreshToken', token);\n  }\n\n  String? getRefreshToken() => getString('refreshToken');
 }
+
 
 
 
