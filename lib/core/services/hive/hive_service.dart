@@ -9,7 +9,7 @@ class HiveService {\n  HiveService._();\n\n  static bool _initialized = false;\n
     await Hive.openBox(sessionBoxName);\n    _initialized = true;\n  }
 
   static Box get _usersBox => Hive.box(usersBoxName);
-  static Box get _sessionBox => Hive.box(sessionBoxName);
+  static Box get _sessionBox => Hive.box(sessionBoxName);\n\n  static bool get isReady => _initialized;
 
   static Map<String, dynamic>? getUserByEmail(String email) {
     final key = email.trim().toLowerCase();
@@ -47,5 +47,6 @@ class HiveService {\n  HiveService._();\n\n  static bool _initialized = false;\n
     await _sessionBox.delete('currentUser');
   }
 }
+
 
 
