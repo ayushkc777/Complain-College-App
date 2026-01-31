@@ -8,7 +8,7 @@ class StorageService {
   // String
   Future<bool> setString(String key, String value) =>
       _prefs.setString(key, value);
-      
+
   String? getString(String key) => _prefs.getString(key);
 
   // Int
@@ -35,4 +35,19 @@ class StorageService {
 
   // Check if key exists
   bool containsKey(String key) => _prefs.containsKey(key);
+
+  // Auth helpers
+  Future<void> saveAuthToken(String token) async {
+    await setString('authToken', token);
+  }
+
+  String? getAuthToken() => getString('authToken');\n\n  Future<void> removeAuthToken() async {\n    await remove('authToken');\n  }
+
+  Future<void> saveUserJson(String json) async {
+    await setString('currentUser', json);
+  }
+
+  String? getUserJson() => getString('currentUser');
 }
+
+
