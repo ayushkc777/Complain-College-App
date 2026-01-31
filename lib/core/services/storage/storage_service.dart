@@ -47,8 +47,9 @@ class StorageService {
     await setString('currentUser', json);
   }
 
-  String? getUserJson() => getString('currentUser');\n\n  Future<void> saveRefreshToken(String token) async {\n    await setString('refreshToken', token);\n  }\n\n  String? getRefreshToken() => getString('refreshToken');
+  String? getUserJson() => getString('currentUser');\n\n  Future<void> removeUserJson() async {\n    await remove('currentUser');\n  }\n\n  Future<void> saveRefreshToken(String token) async {\n    await setString('refreshToken', token);\n  }\n\n  String? getRefreshToken() => getString('refreshToken');
 }
+
 
 
 
